@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpileOnly src/server.ts",
     "sync:database": "ts-node ./node_modules/typeorm/cli.js schema:sync",
-    "build": "sucrase ./src -d ./dist --transforms imports"
+    "build": "npx tsc"
   },
   "dependencies": {
     "express": "^4.17.1",
