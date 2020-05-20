@@ -4,9 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpileOnly src/server.ts",
-    "sync:database": "ts-node ./node_modules/typeorm/cli.js schema:sync",
-    "build": "npx tsc"
+    "start": "NODE_ENV=production node dist/src/server.js",
+    "dev": "ts-node-dev --respawn --poll --transpileOnly src/server.ts",
+    "typeorm": "ts-node ./node_modules/typeorm/cli.js",
+    "sync": "yarn typeorm schema:sync",
+    "migrate": "yarn typeorm migration:run",
+    "build": "tsc"
   },
   "dependencies": {
     "express": "^4.17.1",
@@ -18,6 +21,7 @@
     "dotenv": "^8.0.0",
     "bcryptjs": "^2.4.3",
     "reflect-metadata": "^0.1.13",
+    "tslib": "^1.12.0",
     "youch": "^2.0.10"
   },
   "devDependencies": {
@@ -34,5 +38,8 @@
     "prettier": "^1.18.2",
     "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.8.3"
+  },
+  "resolutions": {
+    "tslib": "1.11.2"
   }
 }

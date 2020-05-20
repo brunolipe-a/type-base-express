@@ -28,7 +28,7 @@ class App {
   }
 
   async database() {
-    const connection = await createConnection();
+    const connection = await createConnection(process.env.NODE_ENV|| "development");
     if (connection === undefined) { throw new Error('Error connecting to database'); }
   }
 
@@ -37,7 +37,7 @@ class App {
   }
 
   exceptionHandler() {
-    this.server.use(async (err: Error, req: Request, res: Response, next: NextFunction) => {
+    this.server.use(async (err: Errback, req: Request, res: Response, next: NextFunction) => {
       if (err instanceof AppError) {
         return res.status(err.statusCode).json(
           { status: 'error', message: err.message }
