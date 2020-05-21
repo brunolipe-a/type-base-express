@@ -1,0 +1,27 @@
+version: '3'
+services:
+  app:
+    build: .
+    container_name: express
+    restart: always
+    # volumes:
+    #   - .:/usr/app
+    command: yarn start
+
+  nginx:
+    build: ./.docker/nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./.docker/nginx/conf.d:/etc/nginx/conf.d
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - app
+    networks:
+      - nginx
+
+networks:
+  nginx:
+    driver: bridge

@@ -28,7 +28,7 @@ class App {
   }
 
   async database() {
-    const connection = await createConnection(process.env.NODE_ENV|| "development");
+    const connection = await createConnection();
     if (connection === undefined) { throw new Error('Error connecting to database'); }
   }
 
